@@ -14,13 +14,13 @@
   <%= link_to 'Wempower chat', root_path, class: 'navbar-brand' %>
 
   <% if user_signed_in? %>
-    <ul class="nav navbar-nav pull-xs-right">
+    <ul class="nav navbar-nav pull-right">
       <li class="nav-item">
         <span class="text-muted">Logged in as <strong><%= current_user.name %></strong></span>
       </li>
-      <li class="nav-item active">
-        <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
-      </li>
+     <%#<li class="nav-item">
+        <span><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link' ></span>
+      </li>%>
     </ul>
   <% end %>
 </nav>
@@ -31,7 +31,8 @@
 
 <footer>
   <div class="container">
-    <p class="text-muted">Created by <%= link_to 'Samreen Malla', 'https://plus.google.com/u/0/115321503597804875178' %></p>
+    <%= link_to 'Log out',destroy_user_session_path, method: :delete %>
+    <%#<p class="text-muted">Created by <%= link_to 'Samreen Malla', 'https://plus.google.com/u/0/115321503597804875178' %></p>
   </div>
 </footer>
 </body>

@@ -3,20 +3,19 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
-      self_current_user =  find_verified_user
-      logger.add_tags 'ActionCable', :current_user.email
+      self.current_user = find_verified_user
+      logger.add_tags 'ActionCable', current_user.email
     end
-    
-    protected
 
-    # this checks whether a user is authenticated with devise or not
-    def find_verified_user 
-      if verified_user = env['warden'].user
+    protected
+    def find_verified_user
+      verified_user = User.find_by(id: cookies.signed['user.id'])
+      if verified_user && cookies.signed['user.expires_at'] > Time.now
         verified_user
       else
         reject_unauthorized_connection
       end
     end
+
   end
 end
-
